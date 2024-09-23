@@ -1,26 +1,26 @@
 package com.shoppingmall.service;
 
-import com.shoppingmall.model.User;
-import com.shoppingmall.repository.UserRepository;
+import com.shoppingmall.model.WebUser;
+import com.shoppingmall.repository.WebUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
     @Autowired
-    private UserRepository userRepository;
+    private WebUserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
-    public User registerUser(User user) {
+    public WebUser registerUser(WebUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("INACTIVE");
         return userRepository.save(user);
     }
 
-    public User findByUsername(String username) {
+    public WebUser findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 }

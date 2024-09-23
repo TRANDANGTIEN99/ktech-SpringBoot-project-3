@@ -10,10 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Entity
-public class User implements UserDetails {
+public class WebUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

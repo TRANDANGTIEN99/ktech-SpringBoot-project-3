@@ -22,8 +22,10 @@ public class ShopService {
     }
 
     public Shop approveShop(Long id) {
-        Shop shop = shopRepository.findById(id).orElseThrow();
+        Shop shop = shopRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Shop not found with id: " + id));
         shop.setStatus("OPEN");
         return shopRepository.save(shop);
     }
+
 }

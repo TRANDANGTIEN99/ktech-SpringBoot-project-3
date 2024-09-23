@@ -25,9 +25,13 @@ public class ShopController {
         return shopService.getAllShops();
     }
 
-    @PutMapping("/approve/{id}")
+    /*@PutMapping("/approve/{id}")
     public ResponseEntity<String> approveShop(@PathVariable Long id) {
         shopService.approveShop(id);
         return ResponseEntity.ok("Shop approved");
+    }*/
+    @PutMapping("/{id}/approve")
+    public Shop approveShop(@PathVariable Long id) {
+        return shopService.approveShop(id);
     }
 }

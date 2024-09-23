@@ -1,6 +1,6 @@
 package com.shoppingmall.controller;
 
-import com.shoppingmall.model.User;
+import com.shoppingmall.model.WebUser;
 import com.shoppingmall.service.AuthService;
 import com.shoppingmall.config.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,8 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        User foundUser = authService.findByUsername(user.getUsername());
+    public ResponseEntity<String> login(@RequestBody WebUser user) {
+        WebUser foundUser = authService.findByUsername(user.getUsername());
         if (foundUser != null && passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
             String token = jwtUtil.generateToken(foundUser.getUsername());
             return ResponseEntity.ok(token);
@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody User user) {
+    public ResponseEntity<String> register(@RequestBody WebUser user) {
         authService.registerUser(user);
         return ResponseEntity.ok("User registered successfully");
     }
